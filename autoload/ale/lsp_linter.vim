@@ -182,7 +182,8 @@ function! ale#lsp_linter#StartLSP(buffer, linter) abort
 
         let l:command = ale#linter#GetCommand(a:buffer, a:linter)
         " Format the command, so %e can be formatted into it.
-        let l:command = ale#command#FormatCommand(a:buffer, l:executable, l:command, 0, {-> 0})[1]
+        " TODO: Add a flag so %t is not permitted.
+        let l:command = ale#command#FormatCommand(a:buffer, l:executable, l:command, 0, v:null)[1]
         let l:command = ale#job#PrepareCommand(a:buffer, l:command)
         let l:ready = ale#lsp#StartProgram(l:conn_id, l:executable, l:command)
     endif
